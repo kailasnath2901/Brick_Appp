@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       clientType: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('retail', 'wholesale', 'contractor')
       },
       brickTypeId: {
         type: Sequelize.UUID
@@ -31,22 +31,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       totalAmount: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 2)
       },
       paymentType: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('cash', 'bank', 'upi', 'credit')
       },
       paymentStatus: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('paid', 'partial', 'unpaid')
       },
       amountPaid: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 2)
       },
       amountPending: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 2)
       },
       vehicleCharges: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 2)
       },
       vehiclePhoto: {
         type: Sequelize.STRING
@@ -59,15 +59,23 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Outgoings');
+
+    // Drop ENUM types (especially important for PostgreSQL)
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Outgoings_clientType";');
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Outgoings_paymentType";');
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Outgoings_paymentStatus";');
   }
 };

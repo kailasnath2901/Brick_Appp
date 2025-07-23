@@ -19,7 +19,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('admin', 'manager', 'user'), // Must define ENUM values
+        allowNull: false,
+        defaultValue: 'user'
       },
       isActive: {
         type: Sequelize.BOOLEAN
