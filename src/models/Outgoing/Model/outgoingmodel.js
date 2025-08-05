@@ -8,22 +8,22 @@ module.exports = (sequelize, DataTypes) => {
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Outgoing.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'user'
-      });
-      Outgoing.belongsTo(models.Client, {
-        foreignKey: 'clientId',
-        as: 'client'
-      });
-      Outgoing.belongsTo(models.BrickType, {   
-        foreignKey: 'brickTypeId',
-        as: 'brickType'
-      });
-    }
+    //  */
+    // static associate(models) {
+    //   // define association here
+    //   Outgoing.belongsTo(models.User, {
+    //     foreignKey: 'userId',
+    //     as: 'user'
+    //   });
+    //   Outgoing.belongsTo(models.Client, {
+    //     foreignKey: 'clientId',
+    //     as: 'client'
+    //   });
+    //   Outgoing.belongsTo(models.BrickType, {   
+    //     foreignKey: 'brickTypeId',
+    //     as: 'brickType'
+    //   });
+    // }
   }
   Outgoing.init({
     userId: DataTypes.UUID,

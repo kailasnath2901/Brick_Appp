@@ -6,7 +6,7 @@ const Sequelize = require("sequelize");
 const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const config = require("../config/config.json")[env]; // Adjust path to your config
 const db = {};
 
 let sequelize;
@@ -21,30 +21,24 @@ if (config.use_env_variable) {
   );
 }
 
-// Import models from the new custom structure
+// Import User model
+const UserModel = require('../src/models/user/usermodel');
+if (UserModel) {
+  const User = UserModel(sequelize, Sequelize.DataTypes);
+  db[User.name] = User;
+}
+
+// Import other models
 const modelPaths = [
-  path.join(__dirname, "../src/models/User/Model/usermodel.js"),
-  path.join(__dirname, "../src/models/Client/Model/clientmodel.js"),
-  path.join(
-    __dirname,
-    "../src/models/ClientTransaction/Model/clienttransactionmodel.js"
-  ),
-  path.join(__dirname, "../src/models/ResourceType/Model/resourcetypemodel.js"),
-  path.join(__dirname, "../src/models/Resource/Model/resourcemodel.js"),
-  path.join(__dirname, "../src/models/BrickType/Model/bricktypemodel.js"),
-  path.join(
-    __dirname,
-    "../src/models/BrickProduction/Model/brickproductionmodel.js"
-  ),
-  path.join(
-    __dirname,
-    "../src/models/BrickTransaction/Model/bricktransactionmodel.js"
-  ),
-  path.join(
-    __dirname,
-    "../src/models/EmployeeSalary/Model/employeesalarymodel.js"
-  ),
-  path.join(__dirname, "../src/models/Outgoing/Model/outgoingmodel.js"),
+  path.join(__dirname, "Client/Model/clientmodel.js"),
+  path.join(__dirname, "ClientTransaction/Model/clienttransactionmodel.js"),
+  path.join(__dirname, "ResourceType/Model/resourcetypemodel.js"),
+  path.join(__dirname, "Resource/Model/resourcemodel.js"),
+  path.join(__dirname, "BrickType/Model/bricktypemodel.js"),
+  path.join(__dirname, "BrickProduction/Model/brickproductionmodel.js"),
+  path.join(__dirname, "BrickTransaction/Model/bricktransactionmodel.js"),
+  path.join(__dirname, "EmployeeSalary/Model/employeesalarymodel.js"),
+  path.join(__dirname, "Outgoing/Model/outgoingmodel.js"),
 ];
 
 // Load each model if the file exists

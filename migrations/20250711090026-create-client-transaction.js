@@ -3,38 +3,22 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ClientTransactions', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
+      // ... other fields remain the same ...
       clientId: {
-        type: Sequelize.UUID
-      },
-      amount: {
-        type: Sequelize.DECIMAL
-      },
-      type: {
-        type: Sequelize.ENUM
-      },
-      description: {
-        type: Sequelize.TEXT
-      },
-      transactionDate: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
+        type: Sequelize.INTEGER, // Changed to match Clients.id
         allowNull: false,
-        type: Sequelize.DATE
+        references: {
+          model: 'Clients', // Must match exact table name
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      // ... rest of the fields ...
     });
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('ClientTransactions', 'fk_client_transaction');
     await queryInterface.dropTable('ClientTransactions');
   }
 };
