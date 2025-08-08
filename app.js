@@ -53,6 +53,7 @@ const apiRoutes = require('./src/routes/auth');
 const brickTypeRoutes = require('./src/routes/brickTypeRoutes');
 const clientRoutes = require('./src/routes/clientRoutes');
 const brickProductionRoutes = require('./src/routes/brickProductionRoutes');
+const employeeSalaryRoutes = require('./src/routes/employeeSalaryRoutes');
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/super-admin/login', authLimiter);
 app.use('/api/register', authLimiter);
@@ -60,6 +61,7 @@ app.use('/api/admin', authLimiter);
 app.use('/api/brick-types', brickTypeRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/productions', brickProductionRoutes);
+app.use('/api/salaries', employeeSalaryRoutes);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
