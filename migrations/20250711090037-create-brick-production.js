@@ -10,7 +10,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       brickTypeId: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER.UNSIGNED,  // ✅ MATCH BrickTypes.id
+        allowNull: false,
+        references: {
+          model: 'BrickTypes',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       quantity: {
         type: Sequelize.INTEGER
@@ -27,6 +34,7 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('BrickProductions');

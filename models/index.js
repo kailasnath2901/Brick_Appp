@@ -30,15 +30,15 @@ if (UserModel) {
 
 // Import other models
 const modelPaths = [
-  path.join(__dirname, "Client/Model/clientmodel.js"),
-  path.join(__dirname, "ClientTransaction/Model/clienttransactionmodel.js"),
-  path.join(__dirname, "ResourceType/Model/resourcetypemodel.js"),
-  path.join(__dirname, "Resource/Model/resourcemodel.js"),
-  path.join(__dirname, "BrickType/Model/bricktypemodel.js"),
-  path.join(__dirname, "BrickProduction/Model/brickproductionmodel.js"),
-  path.join(__dirname, "BrickTransaction/Model/bricktransactionmodel.js"),
-  path.join(__dirname, "EmployeeSalary/Model/employeesalarymodel.js"),
-  path.join(__dirname, "Outgoing/Model/outgoingmodel.js"),
+  path.join(__dirname, "../src/models/Client/Model/clientmodel.js"),
+  path.join(__dirname, "../src/models/ClientTransaction/Model/clienttransactionmodel.js"),
+  path.join(__dirname, "../src/models/ResourceType/Model/resourcetypemodel.js"),
+  path.join(__dirname, "../src/models/Resource/Model/resourcemodel.js"),
+  path.join(__dirname, "../src/models/BrickType/Model/brickTypes.js"),
+  path.join(__dirname, "../src/models/BrickProduction/Model/brickProductions.js"),
+  path.join(__dirname, "../src/models/BrickTransaction/Model/bricktransactionmodel.js"),
+  path.join(__dirname, "../src/models/EmployeeSalary/Model/employeesalarymodel.js"),
+  path.join(__dirname, "../src/models/Outgoing/Model/outgoingmodel.js"),
 ];
 
 // Load each model if the file exists

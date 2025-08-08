@@ -4,10 +4,13 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
+
 // Import routes
-const apiRoutes = require('./src/routes/auth');
+
+
 
 const app = express();
+app.use(express.json());
 
 // Security middleware
 app.use(helmet());
@@ -46,11 +49,17 @@ const authLimiter = rateLimit({
     message: 'Too many authentication attempts, please try again later.'
   }
 });
-
+const apiRoutes = require('./src/routes/auth');
+const brickTypeRoutes = require('./src/routes/brickTypeRoutes');
+const clientRoutes = require('./src/routes/clientRoutes');
+const brickProductionRoutes = require('./src/routes/brickProductionRoutes');
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/super-admin/login', authLimiter);
 app.use('/api/register', authLimiter);
-app.use('/api/admin', authLimiter); 
+app.use('/api/admin', authLimiter);
+app.use('/api/brick-types', brickTypeRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/productions', brickProductionRoutes);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
